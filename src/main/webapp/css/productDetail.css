@@ -1,0 +1,106 @@
+.detail-container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 40px;
+}
+.detail-image {
+    flex: 1;
+    text-align: center;
+}
+.detail-image img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+.detail-info {
+    flex: 1;
+    padding: 10px;
+}
+.detail-info h2 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+.detail-info p {
+    margin: 15px 0;
+    font-size: 16px;
+    color: #666;
+}
+.detail-info .price {
+    color: #e63946;
+    font-size: 32px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+.size-selector {
+    margin: 20px 0;
+}
+.size-selector span {
+    margin-right: 15px;
+
+}
+.size-label {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.size-label input[type="radio"] {
+    display: none;
+}
+.size-label span {
+    display: inline-block;
+    padding: 8px 20px;
+    border: 1px solid #ddd;
+
+    border-radius: 4px;
+    transition: all 0.3s;
+    font-size: 16px;
+}
+.size-label input[type="radio"]:checked + span {
+    background-color: #2E86C1;
+    color: white;
+    border-color: #2E86C1;
+}
+.size-label span:hover {
+    border-color: #2E86C1;
+    color: #2E86C1;
+}
+.add-cart-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 40px;
+    background-color: #2E86C1;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.add-cart-btn:hover {
+    background-color: #1976D2;
+}
+.back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 15px;
+    padding: 12px 30px;
+    background-color: #f5f5f5;
+    color: #333;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+.back-btn:hover {
+    background-color: #e0e0e0;
+}
+
+
+

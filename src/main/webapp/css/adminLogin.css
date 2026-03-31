@@ -1,0 +1,37 @@
+body {
+    /* 替换背景图片：将下面的 URL 改成你自己的图片地址 */
+    /* 本地图片：url('./images/bg.jpg') */
+    /* 网络图片：url('https://example.com/your-image.jpg') */
+    background: url('https://picsum.photos/1920/1080?random=1') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.login-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    max-width: 450px;
+    width: 100%;
+}
+
+.form-label-required::before {
+    content: '*';
+    color: red;
+    margin-right: 4px;
+}
+
+.error-msg {
+    color: #dc3545;
+    font-size: 0.875rem;
+    min-height: 1.25rem;
+}
+
+.input-error {
+    border-color: #dc3545 !important;
+}
+
+.input-success {
+    border-color: #198754 !important;
+}

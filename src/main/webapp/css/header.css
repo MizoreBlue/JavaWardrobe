@@ -1,0 +1,18 @@
+/* 1. 导航栏样式 */
+.navbar {
+    background-color: #2E86C1; /* 主色调：蓝色 */
+    color: white;
+    padding: 15px 20px;
+    display: flex; /* 横向排列 */
+    justify-content: space-between; /* 左右分开 */
+    align-items: center; /* 垂直居中 */
+}
+.nav-left .logo {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.nav-left a {
+    color: white;
+    margin: 0 10px;
+}

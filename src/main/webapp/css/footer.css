@@ -1,0 +1,9 @@
+/* 4. 页脚样式 */
+.footer {
+    background-color: #f5f5f5;
+    text-align: center;
+    padding: 15px;
+    font-size: 12px;
+    color: #666;
+    margin-top: 20px;
+}
