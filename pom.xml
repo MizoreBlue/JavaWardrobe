@@ -20,6 +20,11 @@
       <version>6.0.0</version> <!-- 版本号根据你的Tomcat版本调整 -->
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.31</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>JavaWardrobe</finalName>
