@@ -8,25 +8,56 @@
   <name>JavaWardrobe Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+
+
+    <!--    作于实体类-->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.30</version>
+    </dependency>
+
+
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
       <version>6.0.0</version> <!-- 版本号根据你的Tomcat版本调整 -->
       <scope>provided</scope>
     </dependency>
+
+
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.31</version>
     </dependency>
+
+    <!-- Druid 数据库连接池依赖 -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.2.16</version>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>JavaWardrobe</finalName>
   </build>
+  <properties>
+    <!-- 设置项目构建的源码编码 -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- 设置报告输出的编码 -->
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <!-- 设置 Java 编译版本（根据你的实际情况，例如 1.8 或 17） -->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
 </project>

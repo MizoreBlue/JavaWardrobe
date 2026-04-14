@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>用户注册</title>
-    <link type="text/css" rel="stylesheet" href="../../css/registerForm.css">
-    <script src="../../js/register.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/assets/js/register.js"></script>
+    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/register_form.css">
+    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/common.css">
 </head>
 <body>
 <!-- 1. 导航栏模块 -->
-<%@include file="common/header.jsp"%>
+<%@include file="../common/header.jsp"%>
 <!-- 2. 注册表单区域 -->
 <div class="register-container">
     <h2 class="register-title">用户注册</h2>
@@ -48,6 +49,6 @@
         </div>
     </form>
 </div>
-<%@include file="common/footer.jsp"%>
+<%@include file="../common/footer.jsp"%>
 </body>
 </html>

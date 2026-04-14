@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>商品详情</title>
-    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/productDetail.css">
+    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/product_detail.css">
+    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/common.css">
+
 </head>
 <body>
 
 <!-- 引入头部 -->
-<%@include file="common/header.jsp"%>
+<%@include file="../common/header.jsp"%>
 
 <!-- 2. 商品详情模块 -->
 <%
@@ -66,7 +68,7 @@
 </div>
 
 <!-- 引入底部 -->
-<%@include file="common/footer.jsp"%>
+<%@include file="../common/footer.jsp"%>
 
 </body>
 </html>

@@ -4,12 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <link type="text/css" rel="stylesheet" href="../../css/loginForm.css">
-  <script src="../../js/login.js" type="text/javascript"></script>
+  <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/common.css">
+  <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/login_form.css">
+
+  <script src="../../../js/login.js" type="text/javascript"></script>
 
 </head>
 <body>
-<%@include file="common/header.jsp"%>
+<%@include file="../common/header.jsp"%>
 
 <div class="login-container">
   <h2>用户登录</h2>
@@ -28,7 +30,7 @@
     }
   %>
 
-  <form id="loginForm" onsubmit="checkLogin()" action="handleLogin.jsp">
+  <form id="loginForm" onsubmit="checkLogin()" action="handle_login.jsp">
     <div class="form-group">
       <label for="username">用户名/电话</label>
       <input type="text" id="username" name="username" placeholder="请输入用户名/电话" required>
@@ -44,6 +46,6 @@
   </form>
 </div>
 
-<%@include file="common/footer.jsp"%>
+<%@include file="../common/footer.jsp"%>
 </body>
 </html>

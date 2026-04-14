@@ -32,14 +32,14 @@
                 String p = request.getParameter("page");
                 if (p == null || "backHome".equals(p)) {
             %>
-            <a class="nav-link active" href="backIndex.jsp?page=backHome">
+            <a class="nav-link active" href="index.jsp?page=backHome">
                 <i class="bi bi-house-door"></i>
                 首页
             </a>
             <%
                 } else {
             %>
-            <a class="nav-link" href="backIndex.jsp?page=backHome">
+            <a class="nav-link" href="index.jsp?page=backHome">
                 <i class="bi bi-house-door"></i>
                 首页
             </a>
@@ -49,21 +49,21 @@
         </li>
         <li class="nav-item">
             <a class="nav-link"
-               href="backIndex.jsp?page=clothingManage">
+               href="index.jsp?page=clothingManage">
                 <i class="bi bi-box-seam"></i>
                 服装管理
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
-               href="backIndex.jsp?page=orderManage">
+               href="index.jsp?page=orderManage">
                 <i class="bi bi-cart-check"></i>
                 订单管理
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
-               href="backIndex.jsp?page=userManage">
+               href="index.jsp?page=userManage">
                 <i class="bi bi-people"></i>
                 用户管理
             </a>
@@ -77,19 +77,19 @@
         <%
             if (p == null || "backHome".equals(p)) {
         %>
-        <jsp:include page="backHome.jsp" />
+        <jsp:include page="home.jsp" />
         <%
             } else if ("clothingManage".equals(p)) {
         %>
-        <jsp:include page="clothingManage.jsp" />
+        <jsp:include page="clothing_manage.jsp" />
         <%
             } else if ("orderManage".equals(p)) {
         %>
-        <jsp:include page="orderManage.jsp" />
+        <jsp:include page="order_manage.jsp" />
         <%
             } else if ("userManage".equals(p)) {
         %>
-        <jsp:include page="userManage.jsp" />
+        <jsp:include page="user_manage.jsp" />
         <%
             }
         %>

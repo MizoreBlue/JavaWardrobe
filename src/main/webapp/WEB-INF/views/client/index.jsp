@@ -8,7 +8,7 @@
 </head>
 <body>
 <!-- 1. 导航栏模块 -->
-<%@include file="pages/front/common/header.jsp"%>
+<%@include file="../common/header.jsp"%>
 
 <!-- 2. 页面头部 -->
 <div class="page-header">
@@ -28,7 +28,7 @@
     <p class="product-style">休闲风</p>
     <p class="product-price">¥99</p>
     <%--    <button class="detail-btn">查看详情</button>--%>
-    <a class="detail-btn" href="pages/front/productDetail.jsp?name=简约短袖T恤&image=1.jpeg&style=休闲风&price=99">查看详情</a>
+    <a class="detail-btn" href="product_detail.jsp?name=简约短袖T恤&image=1.jpeg&style=休闲风&price=99">查看详情</a>
   </div>
   <!-- 商品卡片2-6：复制上面的卡片，修改文字即可 -->
   <div class="product-card">
@@ -69,6 +69,6 @@
 </div>
 
 <!-- 4. 页脚 -->
-<%@include file="pages/front/common/footer.jsp"%>
+<%@include file="../common/footer.jsp"%>
 </body>
 </html>

@@ -3,14 +3,12 @@
     // 从session 获取登录用户
     String loginUser = (String) session.getAttribute("loginUser");
 %>
-<link type="text/css" rel="stylesheet" href="../../css/header.css">
-
 
 <!-- 1. 导航栏模块 -->
 <div class="navbar">
     <div class="nav-left">
         <span class="logo">网上衣橱</span>
-        <a href="<%=request.getContextPath()%>/index.jsp">首页</a>
+        <a href="<%=request.getContextPath()%>/">首页</a>
         <a href="#">服装类别</a>
         <a href="#">服装风格</a>
         <a href="#">购物车</a>
@@ -21,8 +19,8 @@
         <%
             if (loginUser == null) {
         %>
-        <a href="<%=request.getContextPath()%>/pages/front/register.jsp">注册</a>
-        <a href="<%=request.getContextPath()%>/pages/front/login.jsp">登录</a>
+        <a href="<%=request.getContextPath()%>/user/register">注册</a>
+        <a href="<%=request.getContextPath()%>/user/login">登录</a>
         <%
             }
         %>
@@ -36,7 +34,7 @@
         %>
         <%=loginUser%>，欢迎您！
         &nbsp;&nbsp;
-        <a href="<%=request.getContextPath()%>/pages/front/login.jsp">退出登录</a>
+        <a href="<%=request.getContextPath()%>/user/login">退出登录</a>
         <%
             }
         %>
