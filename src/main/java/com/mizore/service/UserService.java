@@ -7,7 +7,9 @@ public interface UserService {
 
     /**
      * 用户登录
+     *
      * @param user
+     * @return
      */
-    void login(User user);
+    boolean login(User user);
 }

@@ -1,6 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `java_wardrobe` ;
+CRxEATE DATABASE  IF NOT EXISTS `java_wardrobe` ;
 USE `java_wardrobe`;
-
+xZ
 DROP TABLE IF EXISTS `address_book`;
 CREATE TABLE `address_book` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',

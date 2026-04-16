@@ -1,7 +1,8 @@
+<%@ page import="com.mizore.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     // 从session 获取登录用户
-    String loginUser = (String) session.getAttribute("loginUser");
+    User loginUser = (User) session.getAttribute("user");
 %>
 
 <!-- 1. 导航栏模块 -->
@@ -30,11 +31,10 @@
     <div class="nav-right">
         <%
             if (loginUser != null) {
-                System.out.println(loginUser);
         %>
-        <%=loginUser%>，欢迎您！
+        <%=loginUser.getUsername()%>，欢迎您！
         &nbsp;&nbsp;
-        <a href="<%=request.getContextPath()%>/user/login">退出登录</a>
+        <a href="<%=request.getContextPath()%>/user/logout">退出登录</a>
         <%
             }
         %>

@@ -1,10 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%-- 1. 引入 JSTL 核心标签库 --%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <title>网上衣橱</title>
-  <link type="text/css" rel="stylesheet" href="css/index.css">
+  <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/common.css">
+  <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index.css">
 </head>
 <body>
 <!-- 1. 导航栏模块 -->
@@ -21,51 +25,17 @@
 
 <!-- 3. 商品展示区 -->
 <div class="product-container">
-  <!-- 商品卡片1 -->
-  <div class="product-card">
-    <img src="images/1.jpeg" alt="商品图片">
-    <p class="product-name">简约短袖T恤</p>
-    <p class="product-style">休闲风</p>
-    <p class="product-price">¥99</p>
-    <%--    <button class="detail-btn">查看详情</button>--%>
-    <a class="detail-btn" href="product_detail.jsp?name=简约短袖T恤&image=1.jpeg&style=休闲风&price=99">查看详情</a>
-  </div>
-  <!-- 商品卡片2-6：复制上面的卡片，修改文字即可 -->
-  <div class="product-card">
-    <img src="images/2.jpeg" alt="商品图片">
-    <p class="product-name">高腰牛仔裤</p>
-    <p class="product-style">复古风</p>
-    <p class="product-price">¥199</p>
-    <button class="detail-btn">查看详情</button>
-  </div>
-  <div class="product-card">
-    <img src="images/3.jpeg" alt="商品图片">
-    <p class="product-name">宽松卫衣</p>
-    <p class="product-style">运动风</p>
-    <p class="product-price">¥159</p>
-    <button class="detail-btn">查看详情</button>
-  </div>
-  <div class="product-card">
-    <img src="images/4.jpeg" alt="商品图片">
-    <p class="product-name">西装外套</p>
-    <p class="product-style">通勤风</p>
-    <p class="product-price">¥299</p>
-    <button class="detail-btn">查看详情</button>
-  </div>
-  <div class="product-card">
-    <img src="images/5.jpeg" alt="商品图片">
-    <p class="product-name">碎花连衣裙</p>
-    <p class="product-style">甜美风</p>
-    <p class="product-price">¥229</p>
-    <button class="detail-btn">查看详情</button>
-  </div>
-  <div class="product-card">
-    <img src="images/6.jpeg" alt="商品图片">
-    <p class="product-name">工装短裤</p>
-    <p class="product-style">街头风</p>
-    <p class="product-price">¥119</p>
-    <button class="detail-btn">查看详情</button>
-  </div>
+  <%-- 2. 使用 JSTL 的 forEach 标签遍历集合 --%>
+  <c:forEach items="${clothesList}" var="clothes">
+    <div class="product-card">
+        <%-- 3. 使用 EL 表达式 ${} 获取对象属性 --%>
+      <img src="<%=request.getContextPath()%>/assets/images/${clothes.image}" alt="${clothes.name}">
+      <p class="product-name">${clothes.name}</p>
+      <p class="product-style">${clothes.style}</p>
+      <p class="product-price">¥${clothes.price}</p>
+      <a class="detail-btn" href="${pageContext.request.contextPath}/clothesDetail?id=${clothes.id}">查看详情</a>
+    </div>
+  </c:forEach>
 </div>
 
 <!-- 4. 页脚 -->
