@@ -11,4 +11,11 @@ public interface UserDAO {
      * @return
      */
     User getUser(String username);
+
+
+    /**
+     * 用户注册
+     * @param user
+     */
+    void insert(User user);
 }

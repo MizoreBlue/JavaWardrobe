@@ -14,7 +14,7 @@
 <!-- 2. 注册表单区域 -->
 <div class="register-container">
     <h2 class="register-title">用户注册</h2>
-    <form id="registerForm" onsubmit="check()">
+    <form id="registerForm" onsubmit="check(event)" method="post">
         <!-- 用户名 - 必填 -->
         <div class="form-row">
             <label><span class="required">*</span>用户名</label>

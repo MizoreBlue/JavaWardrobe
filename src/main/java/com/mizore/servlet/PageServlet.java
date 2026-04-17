@@ -17,11 +17,10 @@ import java.util.List;
 @WebServlet(urlPatterns = {"/"})
 public class PageServlet extends HttpServlet {
 
-    // 建议使用单例模式，避免每次请求都创建 Service 实例
     private ClothesService clothesService = new ClothesServiceImpl();
 
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
         String uri = req.getRequestURI();
 
         // 处理首页请求

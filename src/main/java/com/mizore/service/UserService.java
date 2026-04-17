@@ -12,4 +12,11 @@ public interface UserService {
      * @return
      */
     boolean login(User user);
+
+
+    /**
+     * 用户注册
+     * @param user
+     */
+    boolean register(User user);
 }
