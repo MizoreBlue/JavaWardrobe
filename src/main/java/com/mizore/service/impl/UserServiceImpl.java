@@ -5,6 +5,7 @@ import com.mizore.dao.impl.UserDAOImpl;
 import com.mizore.entity.User;
 import com.mizore.service.UserService;
 
+import java.util.List;
 import java.util.Objects;
 
 public class UserServiceImpl implements UserService {
@@ -32,18 +33,29 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 用户注册
+     *
      * @param user
      */
     public boolean register(User user) {
 //        调用DAO 层
 //        暂且要求用户名唯一
         User user1 = userDAO.getUser(user.getUsername());
-        if (Objects.equals(user1.getUsername(), user.getUsername())) {
+        if (user1.getUsername() != null) {
 //            用户已存在，回显错误信息。。。
             return false;
         } else {
             userDAO.insert(user);
             return true;
         }
+    }
+
+
+    /**
+     * 获取所哟用户
+     *
+     * @return
+     */
+    public List<User> getAllUser() {
+        return userDAO.getAllUser();
     }
 }

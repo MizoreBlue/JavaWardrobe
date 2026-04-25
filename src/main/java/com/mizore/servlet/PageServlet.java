@@ -32,7 +32,7 @@ public class PageServlet extends HttpServlet {
             req.setAttribute("clothesList", clothesList);
 
             // 3. 转发到 JSP 页面进行渲染
-            req.getRequestDispatcher("/WEB-INF/views/client/index.jsp").forward(req, resp);
+             req.getRequestDispatcher("/WEB-INF/views/client/index.jsp").forward(req, resp);
         }
     }
 }

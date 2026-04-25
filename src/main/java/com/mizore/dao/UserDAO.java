@@ -2,6 +2,8 @@ package com.mizore.dao;
 
 import com.mizore.entity.User;
 
+import java.util.List;
+
 public interface UserDAO {
 
 
@@ -18,4 +20,11 @@ public interface UserDAO {
      * @param user
      */
     void insert(User user);
+
+
+    /**
+     * 获取所有用户
+     * @return
+     */
+    List<User> getAllUser();
 }

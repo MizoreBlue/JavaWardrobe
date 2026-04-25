@@ -4,11 +4,10 @@ import com.mizore.dao.UserDAO;
 import com.mizore.entity.User;
 import com.mizore.utils.DruidUtils;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
@@ -47,11 +46,17 @@ public class UserDAOImpl implements UserDAO {
      *
      * @param user
      */
+    /**
+     * 添加一个用户
+     *
+     * @param user
+     */
     public void insert(User user) {
-        String sql = "INSERT INTO user (username, password, phone, email, sex, avatar, create_time) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO user (username, password, phone, email, sex, avatar, role,create_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DruidUtils.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             // 关键修改在这里：添加 Statement.RETURN_GENERATED_KEYS
+             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
 //            设置参数
             preparedStatement.setString(1, user.getUsername());
@@ -60,19 +65,19 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setString(5, user.getSex());
             preparedStatement.setString(6, user.getAvatar());
+            preparedStatement.setLong(7, user.getRole());
 
             // 处理时间类型：java.time.LocalDateTime 转 java.sql.Timestamp
             if (user.getCreateTime() != null) {
-                preparedStatement.setTimestamp(7, Timestamp.valueOf(user.getCreateTime()));
+                preparedStatement.setTimestamp(8, Timestamp.valueOf(user.getCreateTime()));
             } else {
-                preparedStatement.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now())); // 如果没传时间，默认当前时间
+                preparedStatement.setTimestamp(8, Timestamp.valueOf(LocalDateTime.now())); // 如果没传时间，默认当前时间
             }
 
             // 4. 执行 SQL
-            // executeUpdate 返回的是受影响的行数（int）
             int rows = preparedStatement.executeUpdate();
 
-
+            // 5. 获取生成的主键 ID
             if (rows > 0) {
                 ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
                 if (generatedKeys.next()) {
@@ -81,8 +86,38 @@ public class UserDAOImpl implements UserDAO {
             }
 
         } catch (Exception e) {
-//            打印错误堆栈信息
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 获取所有用户
+     *
+     * @return
+     */
+    public List<User> getAllUser() {
+        String sql = "select * from user";
+        List<User> users = new ArrayList<>();
+        try (Connection connection = DruidUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery();
+        ) {
+            while (resultSet.next()) {
+                User user = new User();
+                user.setId(resultSet.getLong("id"));
+                user.setUsername(resultSet.getString("username"));
+                user.setPhone(resultSet.getString("phone"));
+                user.setEmail(resultSet.getString("email"));
+                user.setAvatar(resultSet.getString("avatar"));
+                user.setPassword(resultSet.getString("password"));
+                user.setRole(resultSet.getLong("role"));
+                user.setSex(resultSet.getString("sex"));
+
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
     }
 }

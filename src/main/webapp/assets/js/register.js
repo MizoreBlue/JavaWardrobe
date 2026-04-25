@@ -93,7 +93,7 @@ function submitRegister() {
                 alert(data.data);
                 window.location.href = "login";
             } else {
-                alert(data.data());
+                alert(data.data);
             }
         })
         .catch(error => {

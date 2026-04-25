@@ -19,7 +19,7 @@
         conn = DriverManager.getConnection(url, user, password);
 
         //  定义 SQL
-        String strSQL1 = "select * from t_user";
+        String strSQL1 = "select * from user";
         String strSQL3 = "insert into t_user values(null, 2, 2, 2, 2, 2)";
 
 
