@@ -1,3 +1,4 @@
+<%@ page import="com.mizore.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -96,15 +97,33 @@
             background-color: #1abc9c;
             color: #fff;
         }
+
+        .ms-auto > a {
+            color: red;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
+
+<%
+    // 从session 获取登录用户
+    User loginEmployee = (User) session.getAttribute("employee");
+%>
 
 <!-- 1. 顶部导航 -->
 <nav class="top-navbar">
     <h5 class="mb-0">网上衣橱 - 后台管理</h5>
     <div class="ms-auto">
-        <i class="bi bi-person-circle"></i> admin
+        <%
+            if (loginEmployee != null) {
+        %>
+        <%=loginEmployee.getUsername()%>，欢迎您！
+        &nbsp;&nbsp;
+        <button type="button" onclick="employeeLogout()">退出登录</button>
+        <%
+            }
+        %>
     </div>
 </nav>
 
@@ -115,8 +134,25 @@
 <!-- 3. 右侧内容 -->
 <!-- 注意：这里不需要额外的 z-index，靠 iframe 自身的 z-index 来突破 -->
 <div class="content-area">
-    <iframe name="mainFrame" src="/backend/home"></iframe>
+    <iframe name="mainFrame" src="<%=request.getContextPath()%>/backend/home"></iframe>
 </div>
 
+<script>
+   function employeeLogout() {
+       // 发起退出登录的post请求。
+       fetch('backend/user/logout', {
+           method: 'POST',
+       })
+       .then(date => {
+           if (date.status === 200) {
+               alert("退出成功！")
+               window.location.href = "backend/user/login"
+           }else {
+               alert(date.message || '退出失败')
+           }
+       })
+           .catch(err => alert(err))
+   }
+</script>
 </body>
 </html>

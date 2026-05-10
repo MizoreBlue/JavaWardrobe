@@ -3,9 +3,9 @@
 <head>
     <title>后台管理登录</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="../../css/adminLogin.css">
+    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/admin_login.css">
+    <script type="text/javascript" src="<%=request.getContextPath()%>/assets/js/adminLogin.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="../../js/adminLogin.js"></script>
 </head>
 
 <body>
@@ -23,10 +23,10 @@
     <div class="login-card">
         <h2 class="text-center mb-4">管理员登录</h2>
         <!-- 表单内容 -->
-        <form id="loginForm" onsubmit="checkLogin()">
+        <form id="loginForm" onsubmit="checkLogin()" method="post">
             <div class="mb-3">
                 <label for="account" class="form-label form-label-required">账号</label>
-                <input type="text" class="form-control" id="account" name="account" placeholder="请输入用户名或手机号" required onblur="checkAccount()">
+                <input type="text" class="form-control" id="account" name="username" placeholder="请输入用户名或手机号" required onblur="checkAccount()">
                 <span class="error-msg" id="accountError"></span>
             </div>
             <div class="mb-3">

@@ -44,6 +44,12 @@ public class UserServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/views/admin/user_add.jsp").forward(request,response);
         }
 
+
+        if (uri.contains("login")) {
+//            管理员登录页面
+            request.getRequestDispatcher("/WEB-INF/views/admin/admin_login.jsp").forward(request,response);
+        }
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -74,6 +80,38 @@ public class UserServlet extends HttpServlet {
             //            将对象转为字符串并写入响应流
             String json = objectMapper.writeValueAsString(result);
             response.getWriter().write(json);
+        }
+
+
+//        管理员登录
+        if (uri.contains("login")) {
+            User employee = User.builder()
+                    .username(request.getParameter("username"))
+                    .password(request.getParameter("password"))
+                    .build();
+//            参数封装
+//            调用service 层
+            boolean result = userService.login(employee);
+            if (result) {
+//                比对成功返回主页，将用户信息存贮到session
+                employee.setPassword(null);
+                request.getSession().setAttribute("employee", employee);
+//                返回到后端首页
+                response.sendRedirect(request.getContextPath() + "/backend");
+            } else {
+//                登录失败 提示密码错误
+                // 注意：这里存入 session 是为了在重定向后还能获取到刚才输入的用户名，用于回显
+                request.getSession().setAttribute("loginError", "用户名或密码错误");
+                // 浏览器会发起一个新的 GET 请求，地址栏变为 /user/login
+                response.sendRedirect(request.getContextPath() + "backend/user/login");
+            }
+        }
+
+
+//        管理员退出
+        if (uri.contains("logout")) {
+            request.getSession().removeAttribute("employee");
+            response.sendRedirect(request.getContextPath() + "/backend");
         }
     }
 

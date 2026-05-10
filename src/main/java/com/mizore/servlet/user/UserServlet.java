@@ -1,4 +1,4 @@
-package com.mizore.servlet;
+package com.mizore.servlet.user;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mizore.entity.User;
@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @WebServlet(urlPatterns = "/user/*")
 public class UserServlet extends HttpServlet {

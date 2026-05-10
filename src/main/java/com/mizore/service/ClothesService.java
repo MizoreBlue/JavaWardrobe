@@ -12,4 +12,11 @@ public interface ClothesService {
      * @return
      */
     List<Clothes> getClothesList();
+
+
+    /**
+     * 获取单个商品数据
+     * @return
+     */
+    Clothes getClothesDetails(Integer id);
 }

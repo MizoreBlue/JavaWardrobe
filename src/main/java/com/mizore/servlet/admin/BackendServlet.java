@@ -18,9 +18,9 @@ public class BackendServlet extends HttpServlet {
         String uri = request.getRequestURI();
 
 //        截取请求路径
-        uri = uri.replace("/backend/", "/");
+        uri = uri.replace("/backend", "");
 
-        if(uri.equals("/")){
+        if(uri.equals("/") || uri.isEmpty()){
 //            转发到后端首页
             request.getRequestDispatcher("/WEB-INF/views/admin/home.jsp").forward(request,response);
         }

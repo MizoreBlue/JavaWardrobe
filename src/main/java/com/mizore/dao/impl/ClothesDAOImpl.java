@@ -42,4 +42,40 @@ public class ClothesDAOImpl implements ClothesDAO {
         }
         return list;
     }
+
+
+    /**
+     * 获取单个商品数据
+     *
+     * @param id
+     * @return
+     */
+    public Clothes getSingleClothe(Integer id) {
+        Clothes clothes = new Clothes();
+
+        String sql = "select * from clothes where id = ?";
+
+        try (Connection connection = DruidUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+          ) {
+//            设置参数
+            preparedStatement.setString(1, String.valueOf(id));
+//            执行查询
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                clothes.setId(resultSet.getLong("id"));
+                clothes.setName(resultSet.getString("name"));
+                clothes.setDescription(resultSet.getString("description"));
+                clothes.setCategoryId(resultSet.getLong("category_id"));
+                clothes.setImage(resultSet.getString("image"));
+                clothes.setPrice(resultSet.getBigDecimal("price"));
+                clothes.setStock(resultSet.getInt("stock"));
+                clothes.setStyle(resultSet.getString("style"));
+                return clothes;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

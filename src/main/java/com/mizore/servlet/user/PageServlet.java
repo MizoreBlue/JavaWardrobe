@@ -1,9 +1,8 @@
-package com.mizore.servlet;
+package com.mizore.servlet.user;
 
 import com.mizore.entity.Clothes;
 import com.mizore.service.ClothesService;
 import com.mizore.service.impl.ClothesServiceImpl;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

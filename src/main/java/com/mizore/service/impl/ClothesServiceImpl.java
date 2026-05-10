@@ -13,9 +13,20 @@ public class ClothesServiceImpl implements ClothesService {
 
     /**
      * 获取商品数据
+     *
      * @return
      */
     public List<Clothes> getClothesList() {
         return clothesDAO.getList();
+    }
+
+
+    /**
+     * 获取单个商品数据
+     *
+     * @return
+     */
+    public Clothes getClothesDetails(Integer id) {
+        return clothesDAO.getSingleClothe(id);
     }
 }
