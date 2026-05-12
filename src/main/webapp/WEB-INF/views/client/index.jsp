@@ -33,7 +33,7 @@
       <p class="product-name">${clothes.name}</p>
       <p class="product-style">${clothes.style}</p>
       <p class="product-price">¥${clothes.price}</p>
-      <a class="detail-btn" href="${pageContext.request.contextPath}/product/clothesDetail?id=${clothes.id}">查看详情</a>
+      <a class="detail-btn" href="${pageContext.request.contextPath}/clothes/clothesDetail?id=${clothes.id}">查看详情</a>
     </div>
   </c:forEach>
 </div>

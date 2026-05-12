@@ -34,7 +34,7 @@ public class StaticResourceFilter implements Filter {
 
         // 【关键修改】：直接放行，交给后面的 Servlet 处理
         chain.doFilter(httpRequest, httpResponse);
-    }
+         }
 
     private boolean isStaticResource(String uri) {
         return uri.endsWith(".css") ||

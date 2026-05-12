@@ -11,14 +11,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/product/*")
-public class ProductServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/clothes/*")
+public class ClothedServlet extends HttpServlet {
 
     private ClothesService clothesService = new ClothesServiceImpl();
 
 
 
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         // 查看商品列表

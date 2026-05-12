@@ -28,6 +28,7 @@ public class UserLoginFilter implements Filter {
                 uri.contains("/logout") ||
                 uri.equals("/home") ||
                 uri.contains("/register") ||
+                uri.contains("/backend") ||
                 uri.equals("/")) {
             // 白名单路径直接放行
             chain.doFilter(request, response);
@@ -37,7 +38,7 @@ public class UserLoginFilter implements Filter {
         // 2. 检查用户是否已登录（从 Session 中获取用户信息）
         HttpSession session = httpRequest.getSession();
 
-        Object loginUser = session.getAttribute("loginUser");
+        Object loginUser = session.getAttribute("user");
 
         if (loginUser != null) {
             // 已登录，放行请求

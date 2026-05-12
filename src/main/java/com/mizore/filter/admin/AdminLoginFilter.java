@@ -19,7 +19,7 @@ public class AdminLoginFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         String uri = httpRequest.getRequestURI();
-        uri = uri.replace("/backend", "");
+            uri = uri.replace("/backend", "");
 
 
 
@@ -40,6 +40,11 @@ public class AdminLoginFilter implements Filter {
 
         if (loginUser != null) {
             // 已登录，放行请求
+//            处理是首页的情况
+            if(uri.equals("/") || uri.isEmpty()) {
+                request.getRequestDispatcher("/WEB-INF/views/admin/home.jsp").forward(request, response);
+                return;
+            }
             chain.doFilter(request, response);
         } else {
             // 未登录，重定向到登录页面

@@ -140,7 +140,7 @@
 <script>
    function employeeLogout() {
        // 发起退出登录的post请求。
-       fetch('backend/user/logout', {
+       fetch('/user/logout', {
            method: 'POST',
        })
        .then(date => {

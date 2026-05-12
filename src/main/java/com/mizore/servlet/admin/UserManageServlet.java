@@ -18,7 +18,7 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/backend/user/*")
 @MultipartConfig
-public class UserServlet extends HttpServlet {
+public class UserManageServlet extends HttpServlet {
 
     private UserService userService = new UserServiceImpl();
 
