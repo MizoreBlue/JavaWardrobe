@@ -1,14 +1,9 @@
 package com.mizore.servlet.admin;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mizore.entity.Clothes;
-import com.mizore.entity.User;
 import com.mizore.service.ClothesService;
-import com.mizore.service.UserService;
 import com.mizore.service.impl.ClothesServiceImpl;
-import com.mizore.service.impl.UserServiceImpl;
-import com.mizore.utils.Result;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
