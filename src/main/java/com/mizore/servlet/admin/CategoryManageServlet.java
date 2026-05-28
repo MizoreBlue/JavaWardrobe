@@ -12,7 +12,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/backend/category/*")
@@ -36,29 +39,39 @@ public class CategoryManageServlet extends HttpServlet {
          List<Category> categoryList = categoryService.getCategoryList();
          request.setAttribute("categoryList",categoryList);
          request.getRequestDispatcher("/WEB-INF/views/admin/category_manage.jsp").forward(request,response);
-
         }
 
 
 
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json;charset=UTF-8"); //设置响应类型为JSON
+
         String uri = request.getRequestURI();
         uri = uri.replace("/backend/category/", "");
 
         //        对分类的修改
         if (uri.equals("modify")) {
-//            设置修改修改参数
-            Category category = new Category();
-            category.setId(Long.parseLong(request.getParameter("id")));
-            category.setStatus(Integer.parseInt(request.getParameter("status")));
-            category.setSort(Integer.parseInt(request.getParameter("sort")));
-            category.setName(request.getParameter("name"));
+
+            // 1. 从请求体中读出字符穿
+            StringBuilder builder = new StringBuilder();
+            BufferedReader reader = request.getReader();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                builder.append(line);
+            }
+
+            String jsonString = builder.toString();
+
+            // 2. 将 JSON 字符串反序列化为 Category对象
+            Category category = objectMapper.readValue(jsonString, Category.class);
 
 //            修改分类
             Result<String> result;
+
+            // 3. 调用业务层执行修改
             boolean flag = categoryService.updateCategory(category);
             if (flag) {
                 result = Result.success("分类修改成功");
@@ -66,10 +79,9 @@ public class CategoryManageServlet extends HttpServlet {
                 result = Result.error("修改失败，未知错误");
             }
 
-//            返回JSON
+            // 4. 将结果对象转换为JSON 返回给前端
             String json = objectMapper.writeValueAsString(result);
             response.getWriter().write(json);
-
         }
     }
 

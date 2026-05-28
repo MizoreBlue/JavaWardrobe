@@ -9,6 +9,8 @@ import com.mizore.utils.DruidUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +38,10 @@ public class CategoryDAOImpl implements CategoryDAO {
                 category.setName(resultSet.getString("name"));
                 category.setSort(resultSet.getInt("sort"));
                 category.setStatus(resultSet.getInt("status"));
+
+                // 使用 getObject 并指定类型， 将数据的 DATETIME 映射为 Java Date 类型
+                category.setCreateTime(resultSet.getTimestamp("create_time"));
+                category.setUpdateTime(resultSet.getTimestamp("update_time"));
                 categories.add(category);
             }
         }
@@ -54,7 +60,7 @@ public class CategoryDAOImpl implements CategoryDAO {
      */
     public boolean modifyCategory(Category category) {
 
-        String sql = "update category set name = ?, sort = ?, status = ? where id = ?";
+        String sql = "update category set name = ?, sort = ?, status = ?, update_time = ? where id = ?";
 
         try(
                 Connection connection = DruidUtils.getConnection();
@@ -64,8 +70,12 @@ public class CategoryDAOImpl implements CategoryDAO {
             preparedStatement.setString(1, category.getName());
             preparedStatement.setInt(2, category.getSort());
             preparedStatement.setInt(3, category.getStatus());
-            preparedStatement.setLong(4, category.getId());
-            return preparedStatement.execute();
+
+            // 将LocalDateTime 映射为 TimeStamp
+            preparedStatement.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+            preparedStatement.setLong(5, category.getId());
+            int rowsAffected = preparedStatement.executeUpdate();
+            return (rowsAffected > 0);
         }
         catch(Exception e) {
             e.printStackTrace();

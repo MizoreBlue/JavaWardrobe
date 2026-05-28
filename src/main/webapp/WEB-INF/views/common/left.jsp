@@ -88,6 +88,13 @@
             </a>
         </li>
 
+        <li class="menu-item">
+            <a href="<%=path%>/backend/category/list" target="mainFrame" class="menu-link">
+                <span class="menu-icon">🤣</span>
+                分类管理
+            </a>
+        </li>
+
         <!-- 用户管理 -->
         <li class="menu-item">
             <a href="<%=path%>/backend/user/list" target="mainFrame" class="menu-link">

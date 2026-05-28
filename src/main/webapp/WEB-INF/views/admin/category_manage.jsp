@@ -6,6 +6,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
+
 <!-- 页面主容器 -->
 <div class="container-fluid p-4">
 
@@ -83,8 +84,11 @@
                             <!-- 操作按钮 -->
                             <td class="text-center">
                                 <!-- 修改按钮 -->
+                                <!-- 修改按钮：触发模态框 -->
                                 <button class="btn btn-primary btn-sm me-1"
-                                        onclick="window.parent.location.href='<%=request.getContextPath()%>/backend/category/edit?id=${category.id}'">
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modifyModal"
+                                        onclick="fillModal(${category.id}, '${category.name}', ${category.sort}, ${category.status})">
                                     <i class="bi bi-pencil-square"></i> 修改
                                 </button>
 
@@ -111,3 +115,116 @@
         </div>
     </div>
 </div>
+
+<!-- 修改分类的悬浮窗 Modal -->
+<div class="modal fade" id="modifyModal" tabindex="-1" aria-labelledby="modifyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modifyModalLabel">修改分类</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- 隐藏域存储ID -->
+                <input type="hidden" id="modalCategoryId" value="">
+
+                <div class="mb-3">
+                    <label for="modalCategoryName" class="form-label">分类名称</label>
+                    <input type="text" class="form-control" id="modalCategoryName">
+                </div>
+
+                <div class="mb-3">
+                    <label for="modalCategorySort" class="form-label">排序</label>
+                    <input type="number" class="form-control" id="modalCategorySort" value="0">
+                </div>
+
+                <div class="mb-3">
+                    <label for="modalCategoryStatus" class="form-label">状态</label>
+                    <select class="form-select" id="modalCategoryStatus">
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="confirmModify()">确认修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // 全局变量，用于存储当前操作的分类ID
+    let currentCategoryId = null;
+
+    /**
+     * 1. 填充模态框数据
+     * 这个函数在点击表格行的"修改"按钮时调用
+     */
+    function fillModal(id, name, sort, status) {
+        // 将ID存入全局变量和隐藏域
+        currentCategoryId = id;
+        document.getElementById('modalCategoryId').value = id;
+
+        // 填入表单数据
+        document.getElementById('modalCategoryName').value = name;
+        document.getElementById('modalCategorySort').value = sort;
+
+        // 处理下拉框选中状态
+        const statusSelect = document.getElementById('modalCategoryStatus');
+        statusSelect.value = status;
+    }
+
+    /**
+     * 2. 确认修改 (触发 Fetch 请求)
+     * 这个函数在点击悬浮窗里的"确认修改"按钮时调用
+     */
+    function confirmModify() {
+        // 1. 获取悬浮窗中的最新值
+        const id = document.getElementById('modalCategoryId').value;
+        const name = document.getElementById('modalCategoryName').value;
+        const sort = document.getElementById('modalCategorySort').value;
+        const status = document.getElementById('modalCategoryStatus').value;
+
+        // 2. 简单校验
+        if (!name.trim()) {
+            alert("分类名称不能为空！");
+            return;
+        }
+
+        // 3. 发起 Fetch 请求
+        fetch('<%=request.getContextPath()%>/backend/category/modify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: id,
+                name: name,
+                sort: sort,
+                status: status
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // 4. 处理响应结果
+                if (data.code === 1) {
+                    alert("修改成功！");
+                    // 关闭模态框
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('modifyModal'));
+                    modal.hide();
+                    // 刷新页面以显示最新数据
+                    location.reload();
+                } else {
+                    alert("修改失败：" + data.msg);
+                }
+            })
+            .catch(error => {
+                console.error('请求出错:', error);
+                alert("网络请求失败，请重试。");
+            });
+    }
+</script>
