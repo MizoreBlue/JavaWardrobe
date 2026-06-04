@@ -1,12 +1,12 @@
 package com.mizore.controller.admin;
 
 
-import com.mizore.constant.JwtClaimsConstant;
+import com.mizore.common.constant.JwtClaimsConstant;
 import com.mizore.entity.Employee;
-import com.mizore.properties.JwtProperties;
+import com.mizore.common.properties.JwtProperties;
 import com.mizore.service.EmployeeService;
-import com.mizore.utils.JwtUtil;
-import com.mizore.utils.Result;
+import com.mizore.common.utils.JwtUtil;
+import com.mizore.common.utils.Result;
 import com.mizore.vo.EmployeeAddReqVO;
 import com.mizore.vo.EmployeeLoginReqVO;
 import com.mizore.vo.EmployeeLoginRespVO;

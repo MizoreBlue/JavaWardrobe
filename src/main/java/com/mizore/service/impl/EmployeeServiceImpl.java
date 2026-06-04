@@ -1,12 +1,11 @@
 package com.mizore.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.mizore.constant.MessageConstant;
-import com.mizore.constant.PasswordConstant;
-import com.mizore.constant.StatusConstant;
-import com.mizore.context.BaseContext;
+import com.mizore.common.constant.MessageConstant;
+import com.mizore.common.constant.PasswordConstant;
+import com.mizore.common.constant.StatusConstant;
 import com.mizore.entity.Employee;
-import com.mizore.exception.AccountNotFoundException;
+import com.mizore.common.exception.AccountNotFoundException;
 import com.mizore.mapper.EmployeeMapper;
 import com.mizore.service.EmployeeService;
 import com.mizore.vo.EmployeeAddReqVO;
@@ -71,7 +70,17 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param reqVO
      */
     public void add(EmployeeAddReqVO reqVO) {
-        Employee employee = new Employee();
+        // 1. 查询数据库
+        Employee employee = employeeMapper.selectOne(
+                new LambdaQueryWrapper<Employee>()
+                        .eq(Employee::getUsername, reqVO.getUsername())
+        );
+
+        // 用户已存在
+        if (employee.getUsername() != null) {
+            throw new AccountNotFoundException(MessageConstant.ALREADY_EXISTS);
+        }
+
         BeanUtils.copyProperties(reqVO, employee);
 
         employee.setStatus(StatusConstant.ENABLE);
