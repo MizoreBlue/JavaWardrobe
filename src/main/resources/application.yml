@@ -1,0 +1,66 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # === 基础连接配置 (引用 dev 环境变量) ===
+      driver-class-name: ${wardrobe.datasource.driver-class-name}
+      url: jdbc:mysql://${wardrobe.datasource.host}:${wardrobe.datasource.port}/${wardrobe.datasource.database}?allowMultiQueries=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${wardrobe.datasource.username}
+      password: ${wardrobe.datasource.password}
+
+      # === 连接池核心配置 ===
+      initial-size: 5             # 初始连接数
+      min-idle: 5                 # 最小空闲连接
+      max-active: 20              # 最大活跃连接(根据服务器内存调整)
+      max-wait: 60000             # 获取连接最大等待时间(ms)
+
+      # === 连接有效性检测 ===
+      validation-query: SELECT 1  # MySQL 验证语句
+      test-while-idle: true       # 空闲时检测(推荐开启)
+      test-on-borrow: false       # 借出时不检测(提升性能)
+      test-on-return: false       # 归还时不检测
+      time-between-eviction-runs-millis: 60000 # 检测间隔 60s
+
+      # === Druid 监控面板配置 ===
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: admin     # 监控后台账号
+        login-password: admin123  # ⚠️生产环境务必修改为强密码
+        reset-enable: false       # 禁用重置按钮防误操作
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" # 排除静态资源和自身
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开发环境打印SQL，上线前关闭
+  global-config:
+    banner: false
+    db-config:
+      id-type: ASSIGN_ID
+
+
+wardrobe:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: mizore-jwt-secret-key-2026-secure-enough
+    # 设置jwt过期时间
+    admin-ttl: 7200000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: token
+    # 设置jwt签名加密时使用的秘钥
+    user-secret-key: itheima
+    # 设置jwt过期时间
+    user-ttl: 7200000
+    # 设置前端传递过来的令牌名称
+    user-token-name: authentication
